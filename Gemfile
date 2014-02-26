@@ -40,6 +40,12 @@ end
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
+group :development do
+  gem 'capistrano', '~> 3.0.1'
+  gem 'capistrano-rails', '~> 1.1.0'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rbenv', "~> 2.0"
+end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
