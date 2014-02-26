@@ -1,14 +1,19 @@
-#Source: http://www.talkingquickly.co.uk/2014/01/deploying-rails-apps-to-a-vps-with-capistrano-v3/
+# Capistrano deployment setup based on tutorial by Ben Dixon / @talkingquickly
+# http://www.talkingquickly.co.uk/2014/01/deploying-rails-apps-to-a-vps-with-capistrano-v3/
 
 
+# name of your application
 set :application, 'ror-azure-demo'
+
+# name of your user account
+# default for Windows Azure Virtual Machines is 'azureuser'
 set :deploy_user, 'azureuser'
 
-# setup repo details
+# setup github deployment information
 set :scm, :git
 set :repo_url, 'https://github.com/m-gagne/ror-azure-demo.git'
 
-# setup rvm.
+# setup rvm
 set :rbenv_type, :user
 set :rbenv_ruby, '2.0.0-p451'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
@@ -17,15 +22,15 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 # how many old releases do we want to keep
 set :keep_releases, 5
 
-# files we want symlinking to specific entries in shared.
-set :linked_files, %w{config/database.yml config/application.yml}
+# files we want symlinking to specific entries in shared
+set :linked_files, %w{config/database.yml}
 
 # dirs we want symlinking to shared
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # what specs should be run before deployment is allowed to
 # continue, see lib/capistrano/tasks/run_tests.cap
-set :tests, ["spec"]
+#set :tests, ["spec"]
 
 # which config files should be copied by deploy:setup_config
 # see documentation in lib/capistrano/tasks/setup_config.cap
@@ -78,7 +83,7 @@ namespace :deploy do
   # make sure we're deploying what we think we're deploying
   before :deploy, "deploy:check_revision"
   # only allow a deploy with passing tests to deployed
-  before :deploy, "deploy:run_tests"
+  #before :deploy, "deploy:run_tests"
   # compile assets locally then rsync
   after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
   after :finishing, 'deploy:cleanup'
