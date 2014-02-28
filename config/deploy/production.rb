@@ -7,7 +7,7 @@ set :branch, "master"
 set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 
 # specify server DNS name, user & roles
-server 'mgagnevmdemo002.cloudapp.net', user: 'azureuser', roles: %w{web app db}, primary: true
+server 'yourserver.cloudapp.net', user: 'azureuser', roles: %w{web app db}, primary: true
 
 set :deploy_to, "/home/#{fetch(:deploy_user)}/apps/#{fetch(:full_app_name)}"
 
