@@ -1,27 +1,27 @@
-<% title "Windows Azure Ruby on Rails Demo App" %>
+<h1><%= yield(:title) %></h1>
 
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"><%= yield(:title) %></a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
+<p class="lead">Just a quick and simple demo app to test deployments to Windows Azure Virtual Machines.</p>
+
+<a href="<%= new_search_path %>"  class="btn btn-default">Add a new keyword</a>
+<hr/>
+<div id="twitterfeed" class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <ul class="list-group">
+        <% @searches.each do |s| %>
+          <li class="list-group-item">
+            <span class="badge">0</span>
+            <%= s.keyword %>
+          </li>
+        <% end %>
+      </ul>
     </div>
+    <div class="col-md-8">
+      <div class="alert alert-warning"><strong>Todo:</strong> Implement a twitter client here :)</div>
+    </div>
+  </div>
+</div>
 
-    <div class="container">
-      <div class="starter-template">
-        <h1><%= yield(:title) %></h1>
-        <p class="lead">Just a quick and simple demo app to test deployments to Windows Azure Virtual Machines.</p>
-      </div>
-    </div><!-- /.container -->
+<% content_for :footer do %>
+  <%= javascript_include_tag "twitter.feed" %>
+<% end %>

@@ -1,0 +1,23 @@
+<table class="table table-striped searches">
+  <thead>
+    <tr>
+      <th>Keywords</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @searches.each do |search| %>
+      <tr>
+        <td><%= search.keyword %></td>
+        <td><%= link_to 'Edit', edit_search_path(search), class: "btn btn-default" %></td>
+        <td><%= link_to 'Destroy', search, method: :delete, class: "btn btn-danger"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Search Keyword', new_search_path, class: "btn btn-warning" %>
