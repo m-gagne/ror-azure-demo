@@ -38,9 +38,11 @@ end
 # Use unicorn as the app server
 gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
 group :development do
+  # In development use SQLLite
+  gem 'sqlite3'
+
+  # Use Capistrano for deployment
   gem 'capistrano', '~> 3.0.1'
   gem 'capistrano-rails', '~> 1.1.0'
   gem 'capistrano-bundler'
